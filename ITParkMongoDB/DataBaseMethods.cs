@@ -35,5 +35,24 @@ namespace ITParkMongoDB
             var collection = database.GetCollection<Administrator>(admin.vacancy);
             collection.InsertOne(admin);
         }
+
+        public static void FindAdmin(string surnameParam)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Administrator>("Administrator");
+            var list = collection.Find(x => x.surname == surnameParam).ToList();
+
+            if(list.Count != 0)
+            {
+                System.Console.Write("Found:");
+                foreach (var item in list)
+                {
+                    System.Console.WriteLine($"{item.name} {item.surname}");
+                }
+            }
+            else
+                System.Console.WriteLine("Current admin not exist in data base");
+        }
     }
 }
