@@ -6,23 +6,22 @@ using System.Threading.Tasks;
 
 namespace ITParkMongoDB
 {
-    class Administrator 
+    class Mechendaiser
     {
-        public Administrator(string name, string surname, string vacancy)
+        public Mechendaiser(string name, string surname, string fillial, string vacancy, string education)
         {
             this.name = name;
             this.surname = surname;
+            this.fillial = fillial;
             this.vacancy = vacancy;
+            Education = education;
         }
 
         public string name { get; set; }
         public string surname { get; set; }
+        public string fillial { get; set; }
         public string vacancy { get; set; }
 
-        public void AddProductToDatabase(Product product)
-        {
-            DataBaseMethods.AddProductToDatabase(product);
-        }
-
+        public string Education { get; set; }
     }
 }
