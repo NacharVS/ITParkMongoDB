@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,15 @@ namespace ITParkMongoDB
             TypeOfProduct = typeOfProduct;
             ListOfFillials = listOfFillials;
         }
-
+        [BsonId]
+        [BsonIgnoreIfDefault]
         public ObjectId _id;
         public string NameOfProduct { get; set; }
         public double Price { get; set; }
         public double CountAtWarehouse { get; set; }
         public string Manufacturer { get; set; }
         public string TypeOfProduct { get; set; }
+        [BsonIgnoreIfNull]
         public List<string> ListOfFillials { get; set; }
     }
 }
