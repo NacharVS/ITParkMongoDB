@@ -12,6 +12,12 @@ namespace ITParkMongoDB
             this.vacancy = vacancy;
         }
 
+        public Administrator(string name, string surname, string vacancy, int driverCard, string education) : this(name, surname, vacancy)
+        {
+            DriverCard = driverCard;
+            Education = education;
+        }
+
         [BsonId]
         [BsonIgnoreIfDefault]
         public ObjectId _id;
@@ -22,6 +28,11 @@ namespace ITParkMongoDB
         public string surname { get; set; }
         [BsonIgnoreIfDefault]
         public string vacancy { get; set; }
+
+        [BsonIgnoreIfDefault]
+        public int DriverCard { get; set; }
+        [BsonIgnoreIfDefault]
+        public string Education { get; set; }
 
         public void AddProductToDatabase(Product product)
         {

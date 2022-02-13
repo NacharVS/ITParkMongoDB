@@ -55,6 +55,14 @@ namespace ITParkMongoDB
                 System.Console.WriteLine("Current admin not exist in data base");
         }
 
+        public static void ReplaceAdmin(string nameToReplace, Administrator newInfo)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Administrator>("Administrator");
+            collection.ReplaceOne(x => x.name == nameToReplace , newInfo);
+        }
+
 
     }
 }
