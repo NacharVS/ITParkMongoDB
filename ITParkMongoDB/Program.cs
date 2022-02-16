@@ -9,6 +9,9 @@ namespace ITParkMongoDB
         {
             DataBaseMethods.Shopping("Baguette", new Product("Bagguette", 30, 40, "Bahetle", "Bakery", new List<string> { "Pelikan", "Persten", "Pekar'" }));
 
+
+            //start
+
             //DataBaseMethods.ReplaceAdmin("Sergey", new Administrator("Sergey", "Ivanov", "Administrator", 987654, "High"));
             //Administrator admin1 = new Administrator("Fedor", "Fedorov", "Administrator");
             //DataBaseMethods.AddAdminToDatabase(admin1);
