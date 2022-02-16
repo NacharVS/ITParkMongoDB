@@ -63,6 +63,20 @@ namespace ITParkMongoDB
             collection.ReplaceOne(x => x.name == nameToReplace , newInfo);
         }
 
+        public static void AddClientToDatabase(Client customer)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Clients");
+            collection.InsertOne(customer);
+        }
 
+        public static void ReplaceProduct(Product product)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Product>(product.TypeOfProduct);
+            collection.ReplaceOne(x => x.NameOfProduct == product.NameOfProduct, product);
+        }
     }
 }
