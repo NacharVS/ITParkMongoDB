@@ -19,6 +19,9 @@ namespace ITParkMongoDB
             TypeOfProduct = typeOfProduct;
             ListOfFillials = listOfFillials;
         }
+
+
+
         [BsonId]
         [BsonIgnoreIfDefault]
         public ObjectId _id;
