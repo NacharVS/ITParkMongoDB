@@ -21,9 +21,20 @@ namespace ITParkMongoDB
 
         public void AddToCart(Product product)
         {
-            cart.Add(product);
+            GetCart("Vadim");
+            if (cart.Exists(x => x.NameOfProduct == product.NameOfProduct))
+            {
+                var current = cart.Find(x => x.NameOfProduct == product.NameOfProduct);
+                current.CountAtWarehouse += product.CountAtWarehouse;              
+            }
+            else
+            {
+                cart.Add(product);
+            }
+            
             Currency = SetCurrency();
         }
+
 
         private double SetCurrency()
         {
@@ -33,6 +44,11 @@ namespace ITParkMongoDB
                 localCurrency += item.Price * item.CountAtWarehouse;
             }
             return localCurrency;
+        }
+
+        public void GetCart(string name)
+        {
+            cart = DataBaseMethods.GetCart(name).cart;
         }
     }
 }

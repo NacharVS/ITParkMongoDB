@@ -7,17 +7,14 @@ namespace ITParkMongoDB
     {
         static void Main(string[] args)
         {
-            Client client = new Client();
-            client.Buy("Bread", "Food", 5);
+            Client client = new Client("Vadim");
+            client.Buy("Shampoo", "Cosmetic", 5);
+            Client.ClientsLog(client);
             client.ShowCart();
             //Administrator admin1 = new Administrator("Fedor", "Fedorov", "Administrator");
             //DataBaseMethods.AddAdminToDatabase(admin1);
             //DataBaseMethods.AddMerchToDatabase(new Mechendaiser("Petr", "Petrov", "Pelikan", "Merchendaizer", "middle"));
-
-            //1. Добавить по 5 товаров в разные категории(всего 4 категории)
-            //2. Реализовать класс Client и в нём, реализовать метод покупки товара, с условием,
-            //   что на складе(в базе данных) товар уменьшается после покупки.
-            // 
+            //  Доработать текущий код, чтобы если такого клиента нет в бд -  клиент добавлялся, а если есть - обновлялся. 
             
 
         }
