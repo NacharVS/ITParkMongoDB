@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ITParkMongoDB
 {
-    class Product
+    public class Product
     {
         public Product(string nameOfProduct, double price, double countAtWarehouse, string manufacturer, string typeOfProduct, List<string> listOfFillials)
         {

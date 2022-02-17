@@ -1,9 +1,13 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ITParkMongoDB
 {
-    class Administrator 
+    public class Administrator 
     {
         public Administrator(string name, string surname, string vacancy)
         {
@@ -20,7 +24,7 @@ namespace ITParkMongoDB
 
         [BsonId]
         [BsonIgnoreIfDefault]
-        public ObjectId _id;
+        public Object _id;
         [BsonElement("NameOfAdmin")]
         [BsonIgnoreIfDefault]
         public string name { get; set; }
@@ -31,12 +35,12 @@ namespace ITParkMongoDB
 
         [BsonIgnoreIfDefault]
         public int DriverCard { get; set; }
-        [BsonIgnoreIfDefault]
-        public string Education { get; set; }
 
-        public void AddProductToDatabase(Product product)
+        [BsonIgnoreIfNull]
+        public string Education { get; set; }
+        public void AddProductToDataBase (Product product)
         {
-            DataBaseMethods.AddProductToDatabase(product);
+           DataBase.AddProductToDataBase(product);
         }
 
     }
