@@ -9,30 +9,38 @@ namespace ITParkMongoDB
         {
             //DataBaseMethods.ShowProductsInCategory("food");
             //DataBaseMethods.ShowProductsInCategory("cosmetic");
-            
-            
 
-            Client client = new Client("Vadim");
+            Client client = new Client("Bob");
+            
+            Client.ClientsLog(client);
             client.Buy(client.Name, "bread", "food", 1);
             Client.ClientsLog(client);
             client.ShowCart();
             Console.WriteLine();
 
-            Client client1 = new Client("Maria");
-            //DataBaseMethods.AddClientToDatabase(client1);
-            //client1.BuyProduct("coffee", "food", 4);
-            client1.Buy(client1.Name, "milk", "food", 1);
-            //Client.ClientsLog(client1);
-            //client1.Buy(client1.Name, "soap", "cosmetic", 2);
-            Client.ClientsLog(client1);
-            client1.ShowCart();
-            Console.WriteLine();
+            //Client client = new Client("Vadim");
+            //Client.ClientsLog(client);
+            //client.Buy(client.Name, "bread", "food", 1);
+            //Client.ClientsLog(client);
+            //client.ShowCart();
+            //Console.WriteLine();
 
-            //Client client2 = new Client("Elena");
-            //client2.Buy(client2.Name, "butter", "food", 2);
-            //Client.ClientsLog(client2);
-            //client2.ShowCart();
-            
+            //Client client1 = new Client("Maria");
+            ////DataBaseMethods.AddClientToDatabase(client1);
+            ////client1.BuyProduct("coffee", "food", 4);
+            //client1.Buy(client1.Name, "milk", "food", 1);
+            ////Client.ClientsLog(client1);
+            ////client1.Buy(client1.Name, "soap", "cosmetic", 2);
+            //Client.ClientsLog(client1);
+            //client1.ShowCart();
+            //Console.WriteLine();
+
+            Client client2 = new Client("NN");
+            Client.ClientsLog(client2);
+            client2.Buy(client2.Name, "milk", "food", 1);
+            Client.ClientsLog(client2);
+            client2.ShowCart();
+
 
             //DataBaseMethods.ShowProductsInCategory("food");
             //DataBaseMethods.ShowProductsInCategory("cosmetic");
