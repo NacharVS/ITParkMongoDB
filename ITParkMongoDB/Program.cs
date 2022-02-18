@@ -7,18 +7,42 @@ namespace ITParkMongoDB
     {
         static void Main(string[] args)
         {
-            DataBaseMethods.ShowProductsInCategory("food");
-            DataBaseMethods.ShowProductsInCategory("cosmetic");
+            //DataBaseMethods.ShowProductsInCategory("food");
+            //DataBaseMethods.ShowProductsInCategory("cosmetic");
+            
+            
 
-            Client client1 = new Client("Maria", "Petrova");
+            Client client = new Client("Vadim");
+            client.Buy(client.Name, "bread", "food", 1);
+            Client.ClientsLog(client);
+            client.ShowCart();
+            Console.WriteLine();
+
+            Client client1 = new Client("Maria");
             //DataBaseMethods.AddClientToDatabase(client1);
             //client1.BuyProduct("coffee", "food", 4);
-            client1.BuyProduct("coffee", "food", 2);
-            client1.BuyProduct("soap", "cosmetic", 2);
-
+            client1.Buy(client1.Name, "milk", "food", 1);
+            //Client.ClientsLog(client1);
+            //client1.Buy(client1.Name, "soap", "cosmetic", 2);
+            Client.ClientsLog(client1);
+            client1.ShowCart();
             Console.WriteLine();
-            DataBaseMethods.ShowProductsInCategory("food");
-            DataBaseMethods.ShowProductsInCategory("cosmetic");
+
+            //Client client2 = new Client("Elena");
+            //client2.Buy(client2.Name, "butter", "food", 2);
+            //Client.ClientsLog(client2);
+            //client2.ShowCart();
+            
+
+            //DataBaseMethods.ShowProductsInCategory("food");
+            //DataBaseMethods.ShowProductsInCategory("cosmetic");
+
+
+
+
+            //  Доработать текущий код, чтобы если такого клиента нет в бд -  клиент добавлялся, а если есть - обновлялся. 
+
+
 
             //DataBaseMethods.ReplaceAdmin("Sergey", new Administrator("Sergey", "Ivanov", "Administrator", 987654, "High"));
             //Administrator admin1 = new Administrator("Ivan", "Ivanov", "Administrator");
