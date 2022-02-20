@@ -15,11 +15,15 @@ namespace ITParkMongoDB
             if(list.Exists(x=> x.NameOfProduct == name))
             {
                 var current = list.Find(x => x.NameOfProduct == name);
-                current.CountAtWarehouse -= count;
-                DataBaseMethods.ReplaceProduct(current);
-                current.CountAtWarehouse = count;
-                clientsCart.AddToCart(current);
-                Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
+                if (current.CountAtWarehouse>=count)
+                {
+                    current.CountAtWarehouse -= count;
+                    DataBaseMethods.ReplaceProduct(current);
+                    current.CountAtWarehouse = count;
+                    clientsCart.AddToCart(current);
+                    Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
+                }
+                else Console.WriteLine("Not enought");
             }
             else
                 Console.WriteLine("Not found");
@@ -33,6 +37,11 @@ namespace ITParkMongoDB
             }
 
             Console.WriteLine("Total cost is:" + clientsCart.Currency);
+        }
+        public void ClientsLog()
+        {
+            var list = DataBaseMethods.FindClient(Name);
+
         }
     }
 }

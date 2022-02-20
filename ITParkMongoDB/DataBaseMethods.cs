@@ -77,7 +77,19 @@ namespace ITParkMongoDB
             var database = client.GetDatabase("Magnit");
             return database.ListCollectionNames().ToList();          
         }
-
-
+        public static void AddClientToDatabase(Client client1)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            collection.InsertOne(client1);
+        }
+        public static void ReplaceClientToDatabase(Client client1)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            collection.ReplaceOne(x=>x.Name==client1.Name, client1);
+        }
     }
 }
