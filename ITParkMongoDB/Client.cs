@@ -25,16 +25,18 @@ namespace ITParkMongoDB
 
         public void Buy(string name, string category, double count)
         {
+            
             var list = DataBaseMethods.ShowProductsInCategory(category);           
             if(list.Exists(x=> x.NameOfProduct == name))
             {
                 var current = list.Find(x => x.NameOfProduct == name);
+
                 if(current.CountAtWarehouse >= count) 
                 {
                     current.CountAtWarehouse -= count;
                     DataBaseMethods.ReplaceProduct(current);
                     current.CountAtWarehouse = count;
-                    clientsCart.AddToCart(current);
+                    clientsCart.AddToCart(current, Name);
                     Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
                 }
                 else

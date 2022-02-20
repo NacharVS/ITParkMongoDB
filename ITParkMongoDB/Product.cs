@@ -23,7 +23,7 @@ namespace ITParkMongoDB
 
 
         [BsonId]
-        [BsonIgnoreIfDefault]
+        //[BsonIgnoreIfDefault]
         public ObjectId _id;
         public string NameOfProduct { get; set; }
         public double Price { get; set; }

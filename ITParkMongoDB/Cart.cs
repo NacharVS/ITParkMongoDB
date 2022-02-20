@@ -19,9 +19,9 @@ namespace ITParkMongoDB
             cart = new List<Product>();
         }
 
-        public void AddToCart(Product product)
+        public void AddToCart(Product product, string name)
         {
-            GetCart("Vadim");
+            cart = DataBaseMethods.GetCart(name).cart;
             if (cart.Exists(x => x.NameOfProduct == product.NameOfProduct))
             {
                 var current = cart.Find(x => x.NameOfProduct == product.NameOfProduct);
@@ -45,10 +45,6 @@ namespace ITParkMongoDB
             }
             return localCurrency;
         }
-
-        public void GetCart(string name)
-        {
-            cart = DataBaseMethods.GetCart(name).cart;
-        }
+       
     }
 }
