@@ -23,13 +23,15 @@ namespace ITParkMongoDB
 
 
         [BsonId]
-        //[BsonIgnoreIfDefault]
+        [BsonIgnoreIfDefault]
         public ObjectId _id;
         public string NameOfProduct { get; set; }
         public double Price { get; set; }
         public double CountAtWarehouse { get; set; }
         public string Manufacturer { get; set; }
         public string TypeOfProduct { get; set; }
+        [BsonIgnoreIfDefault]
+        public int Discount { get; set; }
         [BsonIgnoreIfNull]
         public List<string> ListOfFillials { get; set; }
     }

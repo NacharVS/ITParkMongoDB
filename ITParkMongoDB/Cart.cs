@@ -15,7 +15,7 @@ namespace ITParkMongoDB
         public Cart()
         {
             Currency = 0;
-            dateOfbuy = DateTime.Now.Date;
+            dateOfbuy = DateTime.Now;
             cart = new List<Product>();
         }
 
