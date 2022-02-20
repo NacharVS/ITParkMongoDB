@@ -19,7 +19,11 @@ namespace ITParkMongoDB
             //Administrator admin1 = new Administrator("Fedor", "Fedorov", "Administrator");
             //DataBaseMethods.AddAdminToDatabase(admin1);
             //DataBaseMethods.AddMerchToDatabase(new Mechendaiser("Petr", "Petrov", "Pelikan", "Merchendaizer", "middle"));
-            //  Доработать текущий код, чтобы если такого клиента нет в бд -  клиент добавлялся, а если есть - обновлялся. 
+
+
+            //  1. Реализовать клубную карту отдельным классом, с полями номер карты,
+            //  накопленные баллы(за каждую 1000 у.е. начисляется 1 монетка), скидка по карте,
+            //  статус карты(чем выше статус - тем больше скидка)
 
 
         }
