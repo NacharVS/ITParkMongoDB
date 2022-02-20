@@ -131,7 +131,7 @@ namespace ITParkMongoDB
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Magnit");
             var collection = database.GetCollection<Client>("Logs");
-            var defenition = Builders<Client>.Update.Pull(x => x.clientsCart.cart, new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz" })); // добавляем новый объект в список cart
+            var defenition = Builders<Client>.Update.Pull(x => x.clientsCart.cart, new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz" })); // добавляем/удаляем  объект в списке cart (push/pull)
             collection.UpdateOne(x => x.Name == "Vadim", defenition);
         }
 
