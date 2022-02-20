@@ -28,6 +28,7 @@ namespace ITParkMongoDB
             var collection = database.GetCollection<Mechendaiser>(merch.vacancy);
             collection.InsertOne(merch);
         }
+
         public static void AddAdminToDatabase(Administrator admin)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -36,12 +37,12 @@ namespace ITParkMongoDB
             collection.InsertOne(admin);
         }
 
-        public static void FindAdmin(string surnameParam)
+        public static void FindAdmin(string nameParam, string surnameParam)
         {
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Magnit");
             var collection = database.GetCollection<Administrator>("Administrator");
-            var list = collection.Find(x => x.surname == surnameParam).ToList();
+            var list = collection.Find(x => x.name == nameParam && x.surname == surnameParam).ToList();
 
             if(list.Count != 0)
             {
@@ -77,6 +78,7 @@ namespace ITParkMongoDB
             var database = client.GetDatabase("Magnit");
             return database.ListCollectionNames().ToList();          
         }
+
         public static void AddClientToDatabase(Client client1)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -92,6 +94,7 @@ namespace ITParkMongoDB
             var collection = database.GetCollection<Client>("Logs");
             collection.ReplaceOne(x => x.Name == client1.Name,  client1);
         }
+
         public static List<Client> FindClient(string name)
         {
             var client = new MongoClient("mongodb://localhost");
