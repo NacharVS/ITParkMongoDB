@@ -14,7 +14,10 @@ namespace ITParkMongoDB
         [BsonIgnoreIfDefault]
         ObjectId _id;
         public string Name { get; set; }
-        
+        public bool ShoppingClubCard { get; set; } // 5% скидка
+        public bool VIPShoppingClubCard { get; set; } // 15% скидка
+
+
         [BsonElement("Cart")]
         public Cart clientsCart = new Cart();
 
