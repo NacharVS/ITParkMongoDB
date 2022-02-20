@@ -14,7 +14,6 @@ namespace ITParkMongoDB
         [BsonIgnoreIfDefault]
         ObjectId _id;
         public string Name { get; set; }
-        
         [BsonElement("Cart")]
         public Cart clientsCart = new Cart();
 
@@ -23,19 +22,21 @@ namespace ITParkMongoDB
             Name = name;
         }
 
-        public void Buy(string name, string category, double count)
+        public void Buy(string nameOfProduct, double count, string manufacturer, string typeOfProduct)
         {
-            var list = DataBaseMethods.ShowProductsInCategory(category);           
-            if(list.Exists(x=> x.NameOfProduct == name))
+            var list = DataBaseMethods.ShowProductsInCategory(typeOfProduct);
+            
+            if(list.Exists(x=> x.NameOfProduct == nameOfProduct && x.Manufacturer == manufacturer))
             {
-                var current = list.Find(x => x.NameOfProduct == name);
+                var current = list.Find(x => x.NameOfProduct == nameOfProduct && x.Manufacturer == manufacturer);
+
                 if(current.CountAtWarehouse >= count) 
                 {
                     current.CountAtWarehouse -= count;
                     DataBaseMethods.ReplaceProduct(current);
                     current.CountAtWarehouse = count;
-                    clientsCart.AddToCart(current);
-                    Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
+                    clientsCart.AddToCart(current, Name);
+                    Console.WriteLine($"{current.NameOfProduct}  {current.CountAtWarehouse}  {current.Manufacturer}  {current.TypeOfProduct}");
                 }
                 else
                 {
@@ -49,7 +50,7 @@ namespace ITParkMongoDB
 
         public void ShowCart()
         {
-            foreach (var item in clientsCart.cart)
+            foreach (var item in clientsCart.productList)
             {
                 Console.WriteLine($"{item.NameOfProduct} {item.CountAtWarehouse}");
             }
@@ -60,7 +61,7 @@ namespace ITParkMongoDB
         public static void ClientsLog(Client client)
         {
             var list = DataBaseMethods.FindClient(client.Name);
-            if(list.Exists(x => x.Name == client.Name))
+            if (list.Exists(x => x.Name == client.Name))
             {
                 DataBaseMethods.ReplaceClientToDatabase(client);
             }

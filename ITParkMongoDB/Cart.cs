@@ -10,36 +10,39 @@ namespace ITParkMongoDB
     {
         public double Currency { get; set; }
         public DateTime dateOfbuy;
-        public List<Product> cart;
+        public List<Product> productList;
 
         public Cart()
         {
             Currency = 0;
             dateOfbuy = DateTime.Now.Date;
-            cart = new List<Product>();
+            productList = new List<Product>();
         }
 
-        public void AddToCart(Product product)
+        public void AddToCart(Product product, string name)
         {
-            GetCart("Vadim");
-            if (cart.Exists(x => x.NameOfProduct == product.NameOfProduct))
+            GetCart(name);
+
+            if (productList.Exists(x => x.NameOfProduct == product.NameOfProduct && x.Manufacturer == product.Manufacturer))
             {
-                var current = cart.Find(x => x.NameOfProduct == product.NameOfProduct);
-                current.CountAtWarehouse += product.CountAtWarehouse;              
+                var current = productList.Find(x => x.NameOfProduct == product.NameOfProduct && x.Manufacturer == product.Manufacturer);
+                current.CountAtWarehouse += product.CountAtWarehouse;
+                
             }
             else
             {
-                cart.Add(product);
+                productList.Add(product);
             }
             
             Currency = SetCurrency();
         }
 
 
+
         private double SetCurrency()
         {
             double localCurrency = 0;
-            foreach (var item in cart)
+            foreach (var item in productList)
             {
                 localCurrency += item.Price * item.CountAtWarehouse;
             }
@@ -48,7 +51,7 @@ namespace ITParkMongoDB
 
         public void GetCart(string name)
         {
-            cart = DataBaseMethods.GetCart(name).cart;
+            productList = DataBaseMethods.GetCart(name).productList;
         }
     }
 }

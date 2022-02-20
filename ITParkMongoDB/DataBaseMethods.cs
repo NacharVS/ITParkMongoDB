@@ -13,7 +13,7 @@ namespace ITParkMongoDB
             collection.InsertOne(product);
         }
 
-        public static List<Product>  ShowProductsInCategory(string category)
+        public static List<Product> ShowProductsInCategory(string category)
         {
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Magnit");
@@ -69,7 +69,7 @@ namespace ITParkMongoDB
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Magnit");
             var collection = database.GetCollection<Product>(product.TypeOfProduct);
-            collection.ReplaceOne(x => x.NameOfProduct == product.NameOfProduct, product);
+            collection.ReplaceOne(x => x.NameOfProduct == product.NameOfProduct && x.Manufacturer == product.Manufacturer, product);
         }
 
         public static List<string> GetCollections()
@@ -84,15 +84,22 @@ namespace ITParkMongoDB
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Magnit");
             var collection = database.GetCollection<Client>("Logs");
-            collection.InsertOne(client1);
-        }
+            var list = collection.Find(x => x.Name == client1.Name).ToList();
 
-        public static void ReplaceClientToDatabase(Client client1)
-        {
-            var client = new MongoClient("mongodb://localhost");
-            var database = client.GetDatabase("Magnit");
-            var collection = database.GetCollection<Client>("Logs");
-            collection.ReplaceOne(x => x.Name == client1.Name,  client1);
+
+            if (list.Exists(x => x.Name == client1.Name))
+            {
+                ReplaceClientToDatabase(client1);
+                System.Console.WriteLine("The are the client in base");
+            }
+            else
+            {
+                collection.InsertOne(client1);
+                System.Console.WriteLine("Add a new client");
+            }
+
+
+            
         }
 
         public static List<Client> FindClient(string name)
@@ -103,12 +110,21 @@ namespace ITParkMongoDB
             return collection.Find(x => x.Name == name).ToList();
         }
 
+        public static void ReplaceClientToDatabase(Client client1)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            collection.ReplaceOne(x => x.Name == client1.Name, client1);
+        }
+
         public static Cart GetCart(string name)
         {
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Magnit");
             var collection = database.GetCollection<Client>("Logs");
             var client1 =  collection.Find(x => x.Name == name).FirstOrDefault();
+            
             return client1.clientsCart;
         }
 

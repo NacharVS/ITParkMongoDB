@@ -15,9 +15,17 @@ namespace ITParkMongoDB
             //DataBaseMethods.AddProductToDatabase(new Product("Bread", 56, 40, "OOO Pekarnya №1", "Bakery", new List<string>() { "branch1", "branch2", "branch3" }));
             //DataBaseMethods.AddProductToDatabase(new Product("Bread", 70, 50, "OOO The best pastries", "Bakery", new List<string>() { "branch1", "branch2", "branch3" }));
 
-            //Client client = new Client("Vadim");
-            //client.Buy("Shampoo", "Cosmetic", 5);
-            //Client.ClientsLog(client);
+            //DataBaseMethods.ShowProductsInCategory("Bakery");
+
+            
+
+            Client client = new Client("Vasiliy");
+            //DataBaseMethods.AddClientToDatabase(client);
+            client.Buy("Bread", 5, "OOO Strushkino", "Bakery");
+            Client.ClientsLog(client);
+
+
+
             //client.ShowCart();
             //Administrator admin1 = new Administrator("Sidor", "Sidorov", "Administrator");
             //admin1.AddProductToDatabase(new Product("Potato", 46, 125, "OOO Base №1", "Vegetables", new List<string>() { "branch1", "branch2", "branch3" }));
