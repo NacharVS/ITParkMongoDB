@@ -117,7 +117,23 @@ namespace ITParkMongoDB
             collection.UpdateMany(x => x.NameOfProduct == name, update);
         }
 
+        public static void UpdateUnset(string category, string name)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Product>(category);
+            var update = Builders<Product>.Update.Rename(x => x.Manufacturer, "Manufacturer");
+            collection.UpdateMany(x => x.NameOfProduct == name, update);
+        }
 
+        public static void AddToCliensCart()
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var defenition = Builders<Client>.Update.Pull(x => x.clientsCart.cart, new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz" })); // добавляем новый объект в список cart
+            collection.UpdateOne(x => x.Name == "Vadim", defenition);
+        }
 
     }
 }
