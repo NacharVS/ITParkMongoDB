@@ -13,7 +13,8 @@ namespace ITParkMongoDB
             //client.Buy("Bread", "Food", 5);
             //Client.ClientsLog(client);
             //client.ShowCart();
-            //Administrator admin1 = new Administrator("Fedor", "Fedorov", "Administrator");
+            Administrator admin1 = new Administrator("Fedor", "Fedorov", "Administrator");
+            admin1.UpdateClient("Aleksey", "Fedor");
             //DataBaseMethods.AddAdminToDatabase(admin1);
             //DataBaseMethods.AddMerchToDatabase(new Mechendaiser("Petr", "Petrov", "Pelikan", "Merchendaizer", "middle"));
             //  Доработать текущий код, чтобы если такого клиента нет в бд -  клиент добавлялся, а если есть - обновлялся. 

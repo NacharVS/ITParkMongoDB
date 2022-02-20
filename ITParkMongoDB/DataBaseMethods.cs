@@ -117,6 +117,15 @@ namespace ITParkMongoDB
             collection.UpdateMany(x => x.NameOfProduct == name, update);
         }
 
+        public static void UpdateClient(string category, string name, string newName)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>(category);
+            var update = Builders<Client>.Update.Set(x => x.Name, newName);
+            collection.UpdateMany(x => x.Name == name, update);
+        }
+
 
 
     }

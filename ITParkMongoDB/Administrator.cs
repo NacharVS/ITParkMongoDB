@@ -39,5 +39,10 @@ namespace ITParkMongoDB
             DataBaseMethods.AddProductToDatabase(product);
         }
 
+        public void UpdateClient(string name, string newName)
+        {
+            DataBaseMethods.UpdateClient("Logs", name, newName);
+        }
+
     }
 }
