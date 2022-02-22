@@ -19,6 +19,9 @@ namespace ITParkMongoDB
             TypeOfProduct = typeOfProduct;
             ListOfFillials = listOfFillials;
         }
+
+
+
         [BsonId]
         [BsonIgnoreIfDefault]
         public ObjectId _id;
@@ -27,6 +30,8 @@ namespace ITParkMongoDB
         public double CountAtWarehouse { get; set; }
         public string Manufacturer { get; set; }
         public string TypeOfProduct { get; set; }
+        [BsonIgnoreIfDefault]
+        public int Discount { get; set; }
         [BsonIgnoreIfNull]
         public List<string> ListOfFillials { get; set; }
     }

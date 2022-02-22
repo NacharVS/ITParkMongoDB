@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,17 @@ namespace ITParkMongoDB
         [BsonIgnoreIfDefault]
         ObjectId _id;
         public string Name { get; set; }
+        [BsonIgnoreIfDefault]
+        public bool ShoppingClubCard { get; set; } // 5% скидка
+        [BsonIgnoreIfDefault]
+        public bool VIPShoppingClubCard { get; set; } // 15% скидка
+
 
         [BsonElement("Cart")]
         public Cart clientsCart = new Cart();
+
+        
+        public ClubCard clientsCard = new ClubCard();
 
         public Client(string name)
         {
@@ -23,23 +33,25 @@ namespace ITParkMongoDB
 
         public void Buy(string name, string category, double count)
         {
+
             var list = DataBaseMethods.ShowProductsInCategory(category);
             if (list.Exists(x => x.NameOfProduct == name))
             {
                 var current = list.Find(x => x.NameOfProduct == name);
+
                 if (current.CountAtWarehouse >= count)
                 {
                     current.CountAtWarehouse -= count;
                     DataBaseMethods.ReplaceProduct(current);
                     current.CountAtWarehouse = count;
-                    clientsCart.AddToCart(current);
+                    clientsCart.AddToCart(current, Name);
                     Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
                 }
                 else
                 {
                     Console.WriteLine("Not enough products in warehouse");
                 }
-                DataBaseMethods.ReplaceProduct(current);
+
             }
             else
                 Console.WriteLine("Not found");
@@ -67,5 +79,9 @@ namespace ITParkMongoDB
                 DataBaseMethods.AddClientToDatabase(client);
             }
         }
+        //public void AddToClubCard(string name)
+        //{
+        //    clientsCard = DataBaseMethods.AddToClubCard(name);
+        //}
     }
 }

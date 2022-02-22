@@ -7,7 +7,20 @@ namespace ITParkMongoDB
     {
         static void Main(string[] args)
         {
-            DataBaseMethods.Shopping("Baguette", new Product("Bagguette", 30, 40, "Bahetle", "Bakery", new List<string> { "Pelikan", "Persten", "Pekar'" }));
+            Administrator.AddDiscountCard("Grisha", "0");
+            //DataBaseMethods.AddProductToDatabase(new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz"}));
+            //Client client = new Client("Grisha");
+            ////DataBaseMethods.UpdateSomething("Food", "Tomato", 10);
+            //DataBaseMethods.AddToCliensCart();
+
+            //client.Buy("Bread", "Bakery", 5);
+            //client.Buy("J7", "Juices and water", 5);
+            //client.Buy("Butter", "Milk products", 5);
+            //Client.ClientsLog(client);
+            //client.ShowCart();
+
+
+            //DataBaseMethods.Shopping("Baguette", new Product("Bagguette", 30, 40, "Bahetle", "Bakery", new List<string> { "Pelikan", "Persten", "Pekar'" }));
 
 
             //start
