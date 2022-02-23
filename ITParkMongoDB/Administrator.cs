@@ -44,6 +44,7 @@ namespace ITParkMongoDB
         {
             UpdateDefinition<Client> defenition;
             UpdateDefinition<Client> defenitionUnset;
+
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Magnit");
             var collection = database.GetCollection<Client>("Logs");
