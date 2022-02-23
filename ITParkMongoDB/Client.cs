@@ -23,6 +23,8 @@ namespace ITParkMongoDB
         [BsonElement("Cart")]
         public Cart clientsCart = new Cart();
 
+        [BsonElement("ClubCard")]
+        public ClubCard clubCard;
         public Client(string name)
         {
             Name = name;

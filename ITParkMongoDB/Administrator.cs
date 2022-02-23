@@ -63,5 +63,29 @@ namespace ITParkMongoDB
             collection.UpdateOne(x => x.Name == nameOfClient, defenition);
         }
 
+        public static void AddClubCardBronze(string nameOfClient)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var defenition = Builders<Client>.Update.Set(x => x.clubCard, new ClubCard(12, 200, "95%", "Bronze"));
+            collection.UpdateOne(x => x.Name == nameOfClient, defenition);
+        }
+        public static void AddClubCardSilver(string nameOfClient)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var defenition = Builders<Client>.Update.Set(x => x.clubCard, new ClubCard(12, 500, "90%", "Silver"));
+            collection.UpdateOne(x => x.Name == nameOfClient, defenition);
+        }
+        public static void AddClubCardGold(string nameOfClient)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var defenition = Builders<Client>.Update.Set(x => x.clubCard, new ClubCard(12, 1000, "80%", "Gold"));
+            collection.UpdateOne(x => x.Name == nameOfClient, defenition);
+        }
     }
 }
