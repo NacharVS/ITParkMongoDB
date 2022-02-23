@@ -7,23 +7,31 @@ namespace ITParkMongoDB
     {
         static void Main(string[] args)
         {
-            //DataBaseMethods.ShowProductsInCategory("food");
-            //DataBaseMethods.ShowProductsInCategory("cosmetic");
+            Administrator.AddDiscountCard("NN", "0");
 
-            Client client = new Client("Bob");
-            
+            //  1. Реализовать клубную карту отдельным классом, с полями номер карты,
+            //  накопленные баллы(за каждую 1000 у.е. начисляется 1 монетка), скидка по карте,
+            //  статус карты(чем выше статус - тем больше скидка)
+
+            Client client = new Client("Bob");         
             Client.ClientsLog(client);
-            client.Buy(client.Name, "bread", "food", 1);
-            Client.ClientsLog(client);
+
             client.ShowCart();
-            Console.WriteLine();
+            client.Buy("bread", "food", 1);
+            client.ShowCart();
+            
+            
+            //Administrator.AddDiscountCard("Bob", "0");
 
-            //Client client = new Client("Vadim");
-            //Client.ClientsLog(client);
-            //client.Buy(client.Name, "bread", "food", 1);
-            //Client.ClientsLog(client);
-            //client.ShowCart();
-            //Console.WriteLine();
+
+            Client client11 = new Client("Vadim");
+            Client.ClientsLog(client11);
+
+            client11.ShowCart();
+            client11.Buy("bread", "food", 1);
+            client11.Buy("milk", "food", 1);           
+            client11.ShowCart();
+            Console.WriteLine();
 
             //Client client1 = new Client("Maria");
             ////DataBaseMethods.AddClientToDatabase(client1);
@@ -35,11 +43,11 @@ namespace ITParkMongoDB
             //client1.ShowCart();
             //Console.WriteLine();
 
-            Client client2 = new Client("NN");
-            Client.ClientsLog(client2);
-            client2.Buy(client2.Name, "milk", "food", 1);
-            Client.ClientsLog(client2);
-            client2.ShowCart();
+            //Client client2 = new Client("NN");
+            //Client.ClientsLog(client2);
+            //client2.Buy(client2.Name, "butter", "food", 1);
+            //Client.ClientsLog(client2);
+            //client2.ShowCart();
 
 
             //DataBaseMethods.ShowProductsInCategory("food");

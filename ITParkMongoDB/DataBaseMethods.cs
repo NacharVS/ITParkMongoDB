@@ -80,7 +80,7 @@ namespace ITParkMongoDB
             var database = client.GetDatabase("Magnit");
             return database.ListCollectionNames().ToList();
         }
-
+        
         public static void AddClientToDatabase(Client customer)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -96,6 +96,8 @@ namespace ITParkMongoDB
             var collection = database.GetCollection<Client>("Logs");
             collection.ReplaceOne(x => x.Name == client1.Name, client1);
         }
+
+        
         public static List<Client> FindClient(string name)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -112,6 +114,36 @@ namespace ITParkMongoDB
             var client1 = collection.Find(x => x.Name == name).FirstOrDefault();
             return client1.clientsCart;
         }
+        //
+
+        
+        public static void UpdateSomething(string category, string name, double newDiscount)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Product>(category);
+            var update = Builders<Product>.Update.Set(x => x.Discount, newDiscount);
+            collection.UpdateMany(x => x.NameOfProduct == name, update);
+        }
+
+        public static void UpdateUnset(string category, string name)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Product>(category);
+            var update = Builders<Product>.Update.Rename(x => x.Manufacturer, "Manufacturer");
+            collection.UpdateMany(x => x.NameOfProduct == name, update);
+        }
+
+        public static void AddToCliensCart()
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var defenition = Builders<Client>.Update.Pull(x => x.clientsCart.cart, new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz" })); // добавляем/удаляем  объект в списке cart (push/pull)
+            collection.UpdateOne(x => x.Name == "Vadim", defenition);
+        }
+
 
     }
 }

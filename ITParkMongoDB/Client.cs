@@ -16,6 +16,11 @@ namespace ITParkMongoDB
         ObjectId _id;
         public string Name { get; set; }
 
+        [BsonIgnoreIfDefault]
+        public bool ShoppingClubCard { get; set; } // 5% скидка
+        [BsonIgnoreIfDefault]
+        public bool VIPShoppingClubCard { get; set; } // 15% скидка
+
         [BsonElement("Cart")]
         public Cart clientsCart = new Cart();
         
@@ -31,13 +36,20 @@ namespace ITParkMongoDB
         public Client(string name)
         {
             Name = name;
+            var list = DataBaseMethods.FindClient(Name);
+            if (list.Exists(x => x.Name == Name))
+            {
+                Client current = list.Find(x => x.Name == Name);
+                clientsCart = current.clientsCart;
+            }
+            
         }
 
         
 
         public void ShowCart()
         {
-            foreach (var item in clientsCart.cart)
+            foreach (var item in this.clientsCart.cart)
             {
                 Console.WriteLine($"{item.NameOfProduct} {item.CountAtWarehouse}");
             }
@@ -58,7 +70,8 @@ namespace ITParkMongoDB
             }
         }
 
-        public void Buy(string nameOfClient, string name, string category, double count)
+ 
+        public void Buy(string name, string category, double count)
         {
             var list = DataBaseMethods.ShowProductsInCategory(category);
             if (list.Exists(x => x.NameOfProduct == name))
@@ -67,55 +80,30 @@ namespace ITParkMongoDB
                 if (current.CountAtWarehouse >= count)
                 {
                     current.CountAtWarehouse -= count;
-                    //DataBaseMethods.ReplaceProduct(current);
+                    DataBaseMethods.ReplaceProduct(current);
                     current.CountAtWarehouse = count;
-                    clientsCart.AddToCart(nameOfClient, current, count);
-                    Console.WriteLine($"{nameOfClient} has bought {count} of {current.NameOfProduct}");
-                    Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
+                    clientsCart.AddToCart(Name, current);
+                    //clientsCart.AddToCart(Name, current, count);
+
+                    Console.WriteLine($"{Name} has bought {count} of {current.NameOfProduct}");
+                    //Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
                 }
                 else
                 {
-                    //Console.WriteLine("Not enough products in warehouse");current
                     Console.WriteLine($"{this.Name} has bought {current.CountAtWarehouse} of {current.NameOfProduct}");
                     Console.WriteLine($"It's not enough. The lack of {current.NameOfProduct} is {count - current.CountAtWarehouse}");
+                    
+                    if (current.CountAtWarehouse > 0)  clientsCart.AddToCart(Name, current);
                     current.CountAtWarehouse = 0;
-                    if (current.CountAtWarehouse > 0)  clientsCart.AddToCart(nameOfClient, current, current.CountAtWarehouse);
+                    DataBaseMethods.ReplaceProduct(current);
                 }
-                DataBaseMethods.ReplaceProduct(current);
+                ClientsLog(this);
             }
             else
-                Console.WriteLine("Not found");
+                Console.WriteLine("The product is not founded");
         }
 
-        /*
-        public void BuyProduct(string nameOfProduct, string typeOfProduct, double quantity)
-        {
-            var client = new MongoClient("mongodb://localhost");
-            var database = client.GetDatabase("Magnit");         
-            var collection = database.GetCollection<Product>(typeOfProduct);
-            //Product product
-            var list = collection.Find(x => x.NameOfProduct == nameOfProduct).ToList();
 
-            if (list.Count != 0)
-            {
-                Product product = list[0];
-                if (product.CountAtWarehouse >= quantity)
-                {
-                    product.CountAtWarehouse -= quantity;
-                    Console.WriteLine($"{this.Name} has bought {quantity} of {product.NameOfProduct}");
-                }
-
-                else
-                {                    
-                    Console.WriteLine($"{this.Name} has bought {product.CountAtWarehouse} of {product.NameOfProduct}");
-                    Console.WriteLine($"It's not enough. The lack of {product.NameOfProduct} is {quantity - product.CountAtWarehouse}");
-                    product.CountAtWarehouse = 0;
-                }
-
-                DataBaseMethods.ReplaceProduct(product);
-            }
-            else Console.WriteLine("The product is not founded");
-        }
-        */
+ 
     }
 }

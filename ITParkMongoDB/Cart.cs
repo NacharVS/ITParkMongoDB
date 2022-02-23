@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITParkMongoDB
 {
@@ -19,9 +16,12 @@ namespace ITParkMongoDB
             cart = new List<Product>();
         }
 
-        public void AddToCart(Product product)
+
+        public void AddToCart(string nameOfClient, Product product)
         {
-            GetCart("Vadim");
+            cart = DataBaseMethods.GetCart(nameOfClient).cart;
+            //GetCart(nameOfClient);
+
             if (cart.Exists(x => x.NameOfProduct == product.NameOfProduct))
             {
                 var current = cart.Find(x => x.NameOfProduct == product.NameOfProduct);
@@ -32,27 +32,10 @@ namespace ITParkMongoDB
                 cart.Add(product);
             }
 
-            Currency = SetCurrency();
+            Currency = SetCurrency();          
         }
 
-        public void AddToCart(string nameOfClient, Product product, double count)
-        {
-            var currentProduct = product;
-            currentProduct.CountAtWarehouse = count;
-            GetCart(nameOfClient);
-            if (cart.Exists(x => x.NameOfProduct == product.NameOfProduct))
-            {
-                var current = cart.Find(x => x.NameOfProduct == product.NameOfProduct);
-                current.CountAtWarehouse += currentProduct.CountAtWarehouse;
-            }
-            else
-            {
-                cart.Add(currentProduct);
-            }
-
-            Currency = SetCurrency();
-        }
-
+        
 
         private double SetCurrency()
         {
@@ -64,9 +47,33 @@ namespace ITParkMongoDB
             return localCurrency;
         }
 
-        public void GetCart(string name)
-        {
-            cart = DataBaseMethods.GetCart(name).cart;
-        }
+
+        //public void AddToCart(string nameOfClient, Product product, double count)
+        //{
+        //    var currentProduct = product;
+        //    currentProduct.CountAtWarehouse = count;
+
+        //    cart = DataBaseMethods.GetCart(nameOfClient).cart;
+        //    //GetCart(nameOfClient);
+        //    if (cart.Exists(x => x.NameOfProduct == product.NameOfProduct))
+        //    {
+        //        var current = cart.Find(x => x.NameOfProduct == product.NameOfProduct);
+        //        current.CountAtWarehouse += currentProduct.CountAtWarehouse;
+        //    }
+        //    else
+        //    {
+        //        cart.Add(currentProduct);
+        //    }
+
+        //    Currency = SetCurrency();
+        //}
+
+
+        //public void GetCart(string name)
+        //{
+        //    cart = DataBaseMethods.GetCart(name).cart;
+        //}
+
+
     }
 }

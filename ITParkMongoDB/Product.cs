@@ -10,6 +10,7 @@ namespace ITParkMongoDB
 {
     class Product
     {
+
         public Product(string nameOfProduct, double price, double countAtWarehouse, string manufacturer, string typeOfProduct, List<string> listOfFillials)
         {
             NameOfProduct = nameOfProduct;
@@ -28,8 +29,12 @@ namespace ITParkMongoDB
         public double CountAtWarehouse { get; set; }
         public string Manufacturer { get; set; }
         public string TypeOfProduct { get; set; }
+        
         [BsonIgnoreIfNull]
+        [BsonIgnoreIfDefault]
+        public int Discount { get; set; }
+
         public List<string> ListOfFillials { get; set; }
-  
+        
     }
 }
