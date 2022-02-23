@@ -62,12 +62,26 @@ namespace ITParkMongoDB
             }
 
             collection.UpdateOne(x => x.Name == nameOfClient, defenition);
-            DataBaseMethods.AddToClubCard(nameOfClient);
+            
 
-            //var client1 = collection.UpdateOne(x => x.Name == nameOfClient, defenition);
-            //return client1.clientsCard;
+           
         }
-
-        
+        public static void AddClubCardClassik(string nameOfClient)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var defenition = Builders<Client>.Update.Set(x => x.clientsCard, new ClubCard(0001, 0,"5%", "Classik" ));
+            collection.UpdateOne(x => x.Name == nameOfClient, defenition);
+        }
+      
+        public static void AddClubCardVIP(string nameOfClient)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var defenition = Builders<Client>.Update.Set(x => x.clientsCard, new ClubCard(0001, 1000, "15%", "VIP"));
+            collection.UpdateOne(x => x.Name == nameOfClient, defenition);
+        }
     }
 }

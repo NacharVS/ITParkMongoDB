@@ -7,7 +7,8 @@ namespace ITParkMongoDB
     {
         static void Main(string[] args)
         {
-            Administrator.AddDiscountCard("Grisha", "0");
+            Administrator.AddClubCardClassik("Oleg");
+            Administrator.AddClubCardVIP("Grisha");
             //DataBaseMethods.AddProductToDatabase(new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz"}));
             //Client client = new Client("Grisha");
             ////DataBaseMethods.UpdateSomething("Food", "Tomato", 10);

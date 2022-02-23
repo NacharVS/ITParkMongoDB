@@ -9,20 +9,26 @@ namespace ITParkMongoDB
 {
     class ClubCard
     {
+        public ClubCard()
+        {
+        }
+
+        public ClubCard(int numberOfclubCard, int points, string currentDiscount, string currentStatus)
+        {
+            NumberOfclubCard = numberOfclubCard;
+            Points = points;
+            CurrentDiscount = currentDiscount;
+            CurrentStatus = currentStatus;
+        }
+
         public int NumberOfclubCard { get; set; }
         public int Points { get; set; }
-        public int CurrentDiscount { get; set; }
-        public int CurrentStatus { get; set; }
+        public string CurrentDiscount { get; set; }
+        public string CurrentStatus { get; set; }
         //[BsonElement("ShoppingClubCard")]
         //public ClubCard clientsCard = new ClubCard();
 
-        public ClubCard()
-        {
-            NumberOfclubCard = 1;
-            Points = 2;
-            CurrentDiscount = 3;
-            CurrentStatus = 4;
-        }
+        
 
         //public void AddToClubCard(Client client)
         //{
