@@ -13,6 +13,8 @@ namespace ITParkMongoDB
             //  накопленные баллы(за каждую 1000 у.е. начисляется 1 монетка), скидка по карте,
             //  статус карты(чем выше статус - тем больше скидка)
 
+            Administrator.AddDiscountCard("Bob", "0");
+
             Client client = new Client("Bob");         
             Client.ClientsLog(client);
 

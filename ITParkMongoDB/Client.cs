@@ -23,6 +23,7 @@ namespace ITParkMongoDB
 
         [BsonElement("Cart")]
         public Cart clientsCart = new Cart();
+        public ClubCard clubCard = new ClubCard();
         
         //[BsonIgnoreIfDefault]
         //public string surname { get; set; }
@@ -41,8 +42,10 @@ namespace ITParkMongoDB
             {
                 Client current = list.Find(x => x.Name == Name);
                 clientsCart = current.clientsCart;
-            }
-            
+                clubCard = current.clubCard;
+                ShoppingClubCard = current.ShoppingClubCard;
+                VIPShoppingClubCard = current.VIPShoppingClubCard;
+            }        
         }
 
         
