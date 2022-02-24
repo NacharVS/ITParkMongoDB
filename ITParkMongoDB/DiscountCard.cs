@@ -51,15 +51,15 @@ namespace ITParkMongoDB
             }
             else
             if (TotalCurrency > 5000 )
-            {
+            {               
+                if (TotalCurrency > 10000)
+                {
+                    CardStatus = "Silver";
+                    return 0.1;
+                }
                 return 0.1;
-            }
-            else
-            if(TotalCurrency > 10000)
-            {
-                CardStatus = "Silver";
-                return 0.1;
-            }
+            }          
+
             return 0.01;
         }
 

@@ -24,7 +24,7 @@ namespace ITParkMongoDB
         public Client(string name)
         {
             Name = name;
-            CliensDiscountCard = new DiscountCard(111);
+            CliensDiscountCard = GetCard(Name);
         }
 
         public void Buy(string name, string category, double count)
@@ -41,6 +41,7 @@ namespace ITParkMongoDB
                     DataBaseMethods.ReplaceProduct(current);
                     current.CountAtWarehouse = count;
                     clientsCart.AddToCart(current, Name);
+                    Console.WriteLine(CliensDiscountCard.DiscountValue);
                     CliensDiscountCard.SetTotalCurrency(clientsCart.Currency); 
                     Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
                 }
@@ -75,6 +76,11 @@ namespace ITParkMongoDB
             {
                 DataBaseMethods.AddClientToDatabase(client);
             }
+        }
+
+        private static DiscountCard GetCard(string name)
+        {
+            return DataBaseMethods.FindClientCard(name).CliensDiscountCard;
         }
     }
 }

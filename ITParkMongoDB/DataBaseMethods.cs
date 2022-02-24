@@ -99,6 +99,13 @@ namespace ITParkMongoDB
             var collection = database.GetCollection<Client>("Logs");
             return collection.Find(x => x.Name == name).ToList();
         }
+        public static Client FindClientCard(string name)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            return collection.Find(x => x.Name == name).FirstOrDefault();
+        }
 
         public static Cart GetCart(string name)
         {
