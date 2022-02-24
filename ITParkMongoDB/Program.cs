@@ -7,17 +7,21 @@ namespace ITParkMongoDB
     {
         static void Main(string[] args)
         {
-            Administrator.AddDiscountCard("Vadim", "0");
+            //Administrator.AddDiscountCard("Vadim", "0");
             //DataBaseMethods.AddProductToDatabase(new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz"}));
             //Client client = new Client("Grisha");
             //DataBaseMethods.UpdateSomething("Food", "Tomato", 10);
             //DataBaseMethods.AddToCliensCart();
             //Client.ClientsLog(client);
             //client.Buy("Bread", "Food", 5);
+            //client.Buy("Bread", "Food", 5);
+            //Client.ClientsLog(client);
+            
             //Client.ClientsLog(client);
             //client.ShowCart();
             //Administrator admin1 = new Administrator("Fedor", "Fedorov", "Administrator");
-            //DataBaseMethods.AddAdminToDatabase(admin1);
+            //admin1.AddProductToDatabase(new Product("RedCaviar", 1000, 20, "Vladivostok", "Food", new List<string> { "Pelikan", "Persten", "Samobranka" }));
+            ////DataBaseMethods.AddAdminToDatabase(admin1);
             //DataBaseMethods.AddMerchToDatabase(new Mechendaiser("Petr", "Petrov", "Pelikan", "Merchendaizer", "middle"));
 
 

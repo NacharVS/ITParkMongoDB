@@ -14,10 +14,8 @@ namespace ITParkMongoDB
         [BsonIgnoreIfDefault]
         ObjectId _id;
         public string Name { get; set; }
-        [BsonIgnoreIfDefault]
-        public bool ShoppingClubCard { get; set; } // 5% скидка
-        [BsonIgnoreIfDefault]
-        public bool VIPShoppingClubCard { get; set; } // 15% скидка
+        public DiscountCard CliensDiscountCard { get; set; }
+
 
 
         [BsonElement("Cart")]
@@ -26,6 +24,7 @@ namespace ITParkMongoDB
         public Client(string name)
         {
             Name = name;
+            CliensDiscountCard = new DiscountCard(111);
         }
 
         public void Buy(string name, string category, double count)
@@ -42,6 +41,7 @@ namespace ITParkMongoDB
                     DataBaseMethods.ReplaceProduct(current);
                     current.CountAtWarehouse = count;
                     clientsCart.AddToCart(current, Name);
+                    CliensDiscountCard.SetTotalCurrency(clientsCart.Currency); 
                     Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
                 }
                 else
