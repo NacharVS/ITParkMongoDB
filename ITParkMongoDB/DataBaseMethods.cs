@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 
 namespace ITParkMongoDB
@@ -106,6 +107,14 @@ namespace ITParkMongoDB
             return collection.Find(x => x.Name == name).ToList();
         }
 
+        public static Client FindClientCard(string name)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            return collection.Find(x => x.Name == name).FirstOrDefault();
+        }
+
         public static Cart GetCart(string name)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -114,9 +123,18 @@ namespace ITParkMongoDB
             var client1 = collection.Find(x => x.Name == name).FirstOrDefault();
             return client1.clientsCart;
         }
+
+        public static DiscountCard GetDiscountCard(string name)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Client>("Logs");
+            var client1 = collection.Find(x => x.Name == name).FirstOrDefault();
+            return client1.CliensDiscountCard;
+        }
         //
 
-        
+
         public static void UpdateSomething(string category, string name, double newDiscount)
         {
             var client = new MongoClient("mongodb://localhost");
@@ -143,7 +161,16 @@ namespace ITParkMongoDB
             var defenition = Builders<Client>.Update.Pull(x => x.clientsCart.cart, new Product("Tomato", 200, 90, "Egoryevskie Teplici", "Food", new List<string>() { "bbb, qqq, zzz" })); // добавляем/удаляем  объект в списке cart (push/pull)
             collection.UpdateOne(x => x.Name == "Vadim", defenition);
         }
-
+        public static int GetCardNumber()
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection1 = database.GetCollection<Client>("Logs");
+            int cardNumber = 112;
+            //int cardNumber = (int)collection1.Count(("Logs"), default);
+            
+            return cardNumber + 1;
+        }
 
     }
 }

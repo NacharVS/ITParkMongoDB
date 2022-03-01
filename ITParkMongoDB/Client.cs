@@ -16,23 +16,15 @@ namespace ITParkMongoDB
         ObjectId _id;
         public string Name { get; set; }
 
-        [BsonIgnoreIfDefault]
-        public bool ShoppingClubCard { get; set; } // 5% скидка
-        [BsonIgnoreIfDefault]
-        public bool VIPShoppingClubCard { get; set; } // 15% скидка
+        //[BsonIgnoreIfDefault]
+        //public bool ShoppingClubCard { get; set; } // 5% скидка
+        //[BsonIgnoreIfDefault]
+        //public bool VIPShoppingClubCard { get; set; } // 15% скидка
 
         [BsonElement("Cart")]
         public Cart clientsCart = new Cart();
-        public ClubCard clubCard = new ClubCard();
-        
-        //[BsonIgnoreIfDefault]
-        //public string surname { get; set; }
-
-        //public Client(string name, string surname)
-        //{
-        //    this.name = name;
-        //    this.surname = surname;
-        //}
+        //public DiscountCard discountCard = new DiscountCard();
+        public DiscountCard CliensDiscountCard { get; set; }
 
         public Client(string name)
         {
@@ -42,10 +34,13 @@ namespace ITParkMongoDB
             {
                 Client current = list.Find(x => x.Name == Name);
                 clientsCart = current.clientsCart;
-                clubCard = current.clubCard;
-                ShoppingClubCard = current.ShoppingClubCard;
-                VIPShoppingClubCard = current.VIPShoppingClubCard;
-            }        
+                CliensDiscountCard = GetCard(Name);
+            }
+            else
+            {
+                CliensDiscountCard = new DiscountCard(DataBaseMethods.GetCardNumber());
+            }
+                
         }
 
         
@@ -86,10 +81,11 @@ namespace ITParkMongoDB
                     DataBaseMethods.ReplaceProduct(current);
                     current.CountAtWarehouse = count;
                     clientsCart.AddToCart(Name, current);
-                    //clientsCart.AddToCart(Name, current, count);
-
+                    
                     Console.WriteLine($"{Name} has bought {count} of {current.NameOfProduct}");
                     //Console.WriteLine(current.NameOfProduct + " " + current.Manufacturer + " " + current.CountAtWarehouse);
+                    Console.WriteLine(CliensDiscountCard.DiscountValue);
+                    CliensDiscountCard.SetTotalCurrency(clientsCart.Currency);
                 }
                 else
                 {
@@ -99,6 +95,9 @@ namespace ITParkMongoDB
                     if (current.CountAtWarehouse > 0)  clientsCart.AddToCart(Name, current);
                     current.CountAtWarehouse = 0;
                     DataBaseMethods.ReplaceProduct(current);
+                    Console.WriteLine(CliensDiscountCard.DiscountValue);
+                    CliensDiscountCard.SetTotalCurrency(clientsCart.Currency);
+                    //CliensDiscountCard.SetTotalCurrency(clientsCart.SingleBuy);
                 }
                 ClientsLog(this);
             }
@@ -106,7 +105,12 @@ namespace ITParkMongoDB
                 Console.WriteLine("The product is not founded");
         }
 
+        private static DiscountCard GetCard(string name)
+        {
+            return DataBaseMethods.FindClientCard(name).CliensDiscountCard;
+        }
 
- 
+
+
     }
 }

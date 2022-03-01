@@ -5,10 +5,18 @@ namespace ITParkMongoDB
 {
     class Cart
     {
+        private double _singleBuy;
+        public double SingleBuy 
+        { 
+            get => _singleBuy;
+
+            set { _singleBuy = value; }
+        }
+
         public double Currency { get; set; }
         public DateTime dateOfbuy;
         public List<Product> cart;
-
+        
         public Cart()
         {
             Currency = 0;
@@ -21,29 +29,32 @@ namespace ITParkMongoDB
         {
             cart = DataBaseMethods.GetCart(nameOfClient).cart;
             //GetCart(nameOfClient);
-
+            SingleBuy = product.CountAtWarehouse * product.Price *(1 - DataBaseMethods.GetDiscountCard(nameOfClient).GetDiscount());
             if (cart.Exists(x => x.NameOfProduct == product.NameOfProduct))
             {
                 var current = cart.Find(x => x.NameOfProduct == product.NameOfProduct);
                 current.CountAtWarehouse += product.CountAtWarehouse;
+
             }
             else
             {
                 cart.Add(product);
             }
 
-            Currency = SetCurrency();          
+            Currency = SetCurrency();
+            //DataBaseMethods.GetDiscountCard(nameOfClient).SetTotalCurrency(SingleBuy);
+            //CliensDiscountCard.SetTotalCurrency(clientsCart.Currency);
         }
 
         
 
         private double SetCurrency()
         {
-            double localCurrency = 0;
-            foreach (var item in cart)
-            {
-                localCurrency += item.Price * item.CountAtWarehouse;
-            }
+            double localCurrency = Currency + SingleBuy;
+            //foreach (var item in cart)
+            //{
+            //    localCurrency += item.Price * item.CountAtWarehouse;
+            //}
             return localCurrency;
         }
 

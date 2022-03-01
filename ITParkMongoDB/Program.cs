@@ -7,33 +7,44 @@ namespace ITParkMongoDB
     {
         static void Main(string[] args)
         {
-            Administrator.AddDiscountCard("NN", "0");
+            //Administrator.AddDiscountCard("NN", "0");
+            //Administrator admin1 = new Administrator("Ivan", "Ivanov", "Administrator");
+            //admin1.AddProductToDatabase(new Product("redCaviar", 900, 20, "Murmansk", "food", new List<string> { "Caspiy", "Beztsen", "PUD" }));
 
-            //  1. Реализовать клубную карту отдельным классом, с полями номер карты,
-            //  накопленные баллы(за каждую 1000 у.е. начисляется 1 монетка), скидка по карте,
-            //  статус карты(чем выше статус - тем больше скидка)
 
-            Administrator.AddDiscountCard("Bob", "0");
+            //Client client = new Client("Timofey");
 
-            Client client = new Client("Bob");         
+            //Client.ClientsLog(client);
+            //client.Buy("redCaviar", "food", 5);
+            ////client.Buy("bread", "food", 1);
+            //client.ShowCart();
+
+            //Console.WriteLine(client.CliensDiscountCard.DiscountValue + "  " + client.CliensDiscountCard.CardStatus + " " + client.CliensDiscountCard.TotalCurrency);
+            //client.Buy("Bread", "Food", 5);
+
+            Client client = new Client("Bob");
             Client.ClientsLog(client);
 
             client.ShowCart();
             client.Buy("bread", "food", 1);
             client.ShowCart();
-            
-            
+
+
+
+            //  1. Реализовать клубную карту отдельным классом, с полями номер карты,
+            //  накопленные баллы(за каждую 1000 у.е. начисляется 1 монетка), скидка по карте,
+            //  статус карты(чем выше статус - тем больше скидка)
+
             //Administrator.AddDiscountCard("Bob", "0");
 
+            //Client client11 = new Client("Vadim");
+            //Client.ClientsLog(client11);
 
-            Client client11 = new Client("Vadim");
-            Client.ClientsLog(client11);
-
-            client11.ShowCart();
-            client11.Buy("bread", "food", 1);
-            client11.Buy("milk", "food", 1);           
-            client11.ShowCart();
-            Console.WriteLine();
+            //client11.ShowCart();
+            //client11.Buy("bread", "food", 1);
+            //client11.Buy("milk", "food", 1);           
+            //client11.ShowCart();
+            //Console.WriteLine();
 
             //Client client1 = new Client("Maria");
             ////DataBaseMethods.AddClientToDatabase(client1);

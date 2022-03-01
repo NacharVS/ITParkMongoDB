@@ -40,28 +40,28 @@ namespace ITParkMongoDB
             DataBaseMethods.AddProductToDatabase(product);
         }
 
-        public static void AddDiscountCard(string nameOfClient, string command)
-        {
-            UpdateDefinition<Client> defenition;
-            UpdateDefinition<Client> defenitionUnset;
-            var client = new MongoClient("mongodb://localhost");
-            var database = client.GetDatabase("Magnit");
-            var collection = database.GetCollection<Client>("Logs");
-            if (command == "0")
-            {
-                defenition = Builders<Client>.Update.Set(x => x.ShoppingClubCard, true);
-                defenitionUnset = Builders<Client>.Update.Unset(x => x.VIPShoppingClubCard);
-                collection.UpdateOne(x => x.Name == nameOfClient, defenitionUnset);
-            }
-            else
-            {
-                defenition = Builders<Client>.Update.Set(x => x.VIPShoppingClubCard, true);
-                defenitionUnset = Builders<Client>.Update.Unset(x => x.ShoppingClubCard);
-                collection.UpdateOne(x => x.Name == nameOfClient, defenitionUnset);
-            }
+        //public static void AddDiscountCard(string nameOfClient, string command)
+        //{
+        //    UpdateDefinition<Client> defenition;
+        //    UpdateDefinition<Client> defenitionUnset;
+        //    var client = new MongoClient("mongodb://localhost");
+        //    var database = client.GetDatabase("Magnit");
+        //    var collection = database.GetCollection<Client>("Logs");
+        //    if (command == "0")
+        //    {
+        //        defenition = Builders<Client>.Update.Set(x => x.ShoppingClubCard, true);
+        //        defenitionUnset = Builders<Client>.Update.Unset(x => x.VIPShoppingClubCard);
+        //        collection.UpdateOne(x => x.Name == nameOfClient, defenitionUnset);
+        //    }
+        //    else
+        //    {
+        //        defenition = Builders<Client>.Update.Set(x => x.VIPShoppingClubCard, true);
+        //        defenitionUnset = Builders<Client>.Update.Unset(x => x.ShoppingClubCard);
+        //        collection.UpdateOne(x => x.Name == nameOfClient, defenitionUnset);
+        //    }
 
-            collection.UpdateOne(x => x.Name == nameOfClient, defenition);
-        }
+        //    collection.UpdateOne(x => x.Name == nameOfClient, defenition);
+        //}
 
 
     }
