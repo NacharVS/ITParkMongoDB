@@ -108,7 +108,14 @@ namespace ITParkMongoDB
             var client1 = collection.Find(x => x.Name == name).FirstOrDefault();
             return client1.clientsCart;
         }
-
+        public static void UpdateSomething(string category, string name, double newPrice)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Magnit");
+            var collection = database.GetCollection<Product>(category);
+            var update = Builders<Product>.Update.Set(x => x.Price, newPrice);
+            collection.UpdateMany(x => x.NameOfProduct == name, update);
+        }
 
 
 
